@@ -1,6 +1,6 @@
 import joi from "joi"
 import { connection } from "./index.js"
-import { queries } from "./index.js"
+import { queries } from "../repositorys/index.js"
 
 export const emailExists = async (email) => {
   const { rows: user } = await connection.query(queries.getEmailByEmail(), [
