@@ -1,18 +1,18 @@
-import express from "express"
-import dotenv from "dotenv"
-import cors from "cors"
-import joi from "joi"
-import bcrypt from "bcrypt"
-import { v4 as uuidV4 } from 'uuid' 
-import router from "./routes/index.js"
+import express, { json } from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import joi from "joi";
+import bcrypt from "bcrypt";
+import { v4 as uuidV4 } from "uuid";
+import router from "./routes/index.js";
 
-const server = express()
-dotenv.config()
-server.use(cors())
-server.use(express.json())
-server.use(router)
+dotenv.config();
 
-const { PORT } = process.env
-server.listen(PORT, () => {
-  console.log("server running on PORT " + PORT)
-})
+const server = express();
+const { PORT } = process.env || 3001;
+
+server.use(cors());
+server.use(json());
+server.use(router);
+
+server.listen(PORT, () => console.log(`💫 Magic happens @ http://localhost:${PORT}`));
