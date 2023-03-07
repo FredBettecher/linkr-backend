@@ -9,7 +9,7 @@ import router from "./routes/index.js";
 dotenv.config();
 
 const server = express();
-const { PORT } = process.env;
+const { PORT } = process.env || 3001;
 
 server.use(cors());
 server.use(json());
