@@ -17,12 +17,13 @@ export const signUp = async (request, response) => {
     password: passwordCrypt,
     pictureUrl,
   }
-
+  
   try {
     await authModel.insertUser(user)
-    response.status(StatusCodes.CREATED).send(ReasonPhrases.CREATED)
+    console.log(user)
+    return response.status(StatusCodes.CREATED).send(ReasonPhrases.CREATED)
   } catch (error) {
-    response.status(StatusCodes.INTERNAL_SERVER_ERROR).send(ReasonPhrases.INTERNAL_SERVER_ERROR)
+    return response.status(StatusCodes.INTERNAL_SERVER_ERROR).send(ReasonPhrases.INTERNAL_SERVER_ERROR)
   }
 }
 
@@ -33,8 +34,8 @@ export const signIn = async (request, response) => {
     const { id: userId } = user
     const data = { userId }
     const token = jwt.sign(data, jwtExpire)
-    response.status(StatusCodes.OK).send(token)
+    return response.status(StatusCodes.OK).send(token)
   } catch (error) {
-    response.status(StatusCodes.INTERNAL_SERVER_ERROR).send(ReasonPhrases.INTERNAL_SERVER_ERROR)
+    return response.status(StatusCodes.INTERNAL_SERVER_ERROR).send(ReasonPhrases.INTERNAL_SERVER_ERROR)
   }
 }
