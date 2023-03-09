@@ -11,8 +11,8 @@ export const emailExists = async (email) => {
 }
 
 export const insertUser = async (user) => {
-  const { name, email, password } = user
-  await connection.query(queries.insertInUsers(), [name, email, password])
+  const { username, email, password,  pictureUrl} = user
+  await connection.query(queries.insertInUsers(), [username, email, password, pictureUrl])
 }
 
 export const getPasswordEmail = async (email) => {
@@ -31,10 +31,11 @@ export const getUserByEmail = async (email) => {
 }
 
 export const signupSchema = joi.object({
-  name: joi.string().required().trim(),
+  username: joi.string().required().trim(),
   email: joi.string().email().required().trim(),
   password: joi.string().required(),
-  confirmPassword: joi.string().equal(joi.ref("password")).required(),
+  pictureUrl: joi.string().required(),
+  createdAt: joi.string().required,
 })
 
 export const signinSchema = joi.object({
