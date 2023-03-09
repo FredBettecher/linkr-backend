@@ -18,10 +18,11 @@ export const validateSignUp = (request, response, next) => {
   if (Body.error) return response.status(StatusCodes.UNPROCESSABLE_ENTITY).send(ReasonPhrases.UNPROCESSABLE_ENTITY)
   
   const newUser = {
-    name: stripHtml(Body.value.name).result,
+    username: stripHtml(Body.value.username).result,
     email: stripHtml(Body.value.email).result,
     password: Body.value.password,
-    confirmPassword: Body.value.confirmPassword,
+    pictureUrl: Body.value.pictureUrl,
+    createdAt: Body.value.createdAt,
   }
 
   const validateBody = authModel.signupSchema.validate(newUser)

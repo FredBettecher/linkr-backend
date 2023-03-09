@@ -9,12 +9,14 @@ const EXPIRE_TIME = 60 * 60 * 24 // *1 DAY
 const jwtExpire = {expiresIn: EXPIRE_TIME,}
 
 export const signUp = async (request, response) => {
-  const { name, email, password } = response.locals.newUser
+  const { username, email, password, pictureUrl } = response.locals.newUser
   const passwordCrypt = bcrypt.hashSync(password, 12)
   const user = {
-    name,
+    username,
     email,
     password: passwordCrypt,
+    pictureUrl,
+    createdAt,
   }
 
   try {
