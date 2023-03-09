@@ -17,9 +17,10 @@ export const signUp = async (request, response) => {
     password: passwordCrypt,
     pictureUrl,
   }
-
+  
   try {
     await authModel.insertUser(user)
+    console.log(user)
     return response.status(StatusCodes.CREATED).send(ReasonPhrases.CREATED)
   } catch (error) {
     return response.status(StatusCodes.INTERNAL_SERVER_ERROR).send(ReasonPhrases.INTERNAL_SERVER_ERROR)

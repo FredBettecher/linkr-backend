@@ -13,9 +13,9 @@ export const getEmailByEmail = () => {
   export const insertInUsers = () => {
     const query = `--sql
           INSERT INTO
-              users ("name", "email", "password")
+              users ("username", "email", "password", "pictureUrl")
           VALUES
-              ($1, $2, $3);        
+              ($1, $2, $3, $4);        
       `
     return query
   }
