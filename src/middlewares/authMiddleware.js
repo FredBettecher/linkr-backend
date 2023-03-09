@@ -22,7 +22,6 @@ export const validateSignUp = (request, response, next) => {
     email: stripHtml(Body.value.email).result,
     password: Body.value.password,
     pictureUrl: Body.value.pictureUrl,
-    createdAt: Body.value.createdAt,
   }
 
   const validateBody = authModel.signupSchema.validate(newUser)
