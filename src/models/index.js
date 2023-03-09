@@ -15,3 +15,4 @@ const connection = new Pool(databaseConfig)
 
 export { connection }
 export * as authModel from "./authModel.js"
+export * as queries from "./queries.js"
