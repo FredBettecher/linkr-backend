@@ -24,10 +24,10 @@ export const validateSignUp = (request, response, next) => {
     pictureUrl: Body.value.pictureUrl,
   }
 
-  const validateBody = authModel.signupSchema.validate(newUser)
-  if (validateBody.error) {
-    return response.status(StatusCodes.UNPROCESSABLE_ENTITY).send(ReasonPhrases.UNPROCESSABLE_ENTITY)
-  }
+  //const validateBody = authModel.signupSchema.validate(newUser)
+  // if (validateBody.error) {
+  //   return response.status(StatusCodes.UNPROCESSABLE_ENTITY).send(ReasonPhrases.UNPROCESSABLE_ENTITY)
+  // }
 
   response.locals.newUser = newUser
   next()
