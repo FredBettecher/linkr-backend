@@ -22,13 +22,12 @@ export const validateSignUp = (request, response, next) => {
     email: stripHtml(Body.value.email).result,
     password: Body.value.password,
     pictureUrl: Body.value.pictureUrl,
-    createdAt: Body.value.createdAt,
   }
 
-  const validateBody = authModel.signupSchema.validate(newUser)
-  if (validateBody.error) {
-    return response.status(StatusCodes.UNPROCESSABLE_ENTITY).send(ReasonPhrases.UNPROCESSABLE_ENTITY)
-  }
+  //const validateBody = authModel.signupSchema.validate(newUser)
+  // if (validateBody.error) {
+  //   return response.status(StatusCodes.UNPROCESSABLE_ENTITY).send(ReasonPhrases.UNPROCESSABLE_ENTITY)
+  // }
 
   response.locals.newUser = newUser
   next()

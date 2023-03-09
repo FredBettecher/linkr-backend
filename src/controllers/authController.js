@@ -16,7 +16,6 @@ export const signUp = async (request, response) => {
     email,
     password: passwordCrypt,
     pictureUrl,
-    createdAt,
   }
 
   try {
