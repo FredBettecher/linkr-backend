@@ -9,7 +9,7 @@ export async function hashtag(req, res){
         const hashtag = hashtag.locals.hashtag
         
         const users = await connection.query(`SELECT * FROM users WHERE password = $1;`, [token])
-        console.log(users.rowCount)
+
         if (users.rowCount > 0) {
             const posts = await connection.query(`SELECT * FROM posts JOIN hashtags ON ( "hashtags.postId" = posts.id ) WHERE hashtags.name = $1;`, [hashtag])
             return res.status(200).send(posts.rows)

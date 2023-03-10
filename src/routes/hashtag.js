@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { checkHashTag } from "../middlewares/hashtagMiddlare.js"
+import { checkHashTag } from "../middlewares/hashtagMiddleware.js"
 
 export const timeLineRoute = Router()
 
