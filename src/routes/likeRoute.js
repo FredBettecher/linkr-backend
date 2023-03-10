@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { like, dislike } from "../controllers/likeController.js";
+import { like, dislike, getPostLikes } from "../controllers/likeController.js";
 
 const likeRoute = Router();
 
-likeRouter.post("/like", like);
-likeRouter.delete("/dislike/:postId", dislike);
+likeRoute.post("/like", like);
+likeRoute.delete("/dislike/:postId", dislike);
+likeRoute.get("/likes", getPostLikes);
 
 export default likeRoute;

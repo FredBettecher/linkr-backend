@@ -1,4 +1,4 @@
-import { postLikes, postDislikes } from "../repositorys/likeQuerie.js";
+import { postLikes, postDislikes, getLikes } from "../repositorys/likeQuerie.js";
 
 async function like(req, res) {
     const { userId } = req.locals.userId;
@@ -28,4 +28,19 @@ async function dislike(req, res) {
     }
 }
 
-export { like, dislike }
+async function getPostLikes(req, res){
+    const userId = res.locals.userId;
+
+    try{
+        const likes = await getLikes(userId);
+        const showLikes = {
+            likes,
+        }
+        res.send(showLikes);
+    }catch(error){
+        console.log(error.message);
+        res.status(500).send(error.message);
+    }
+}
+
+export { like, dislike, getPostLikes }

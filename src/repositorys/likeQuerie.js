@@ -5,7 +5,11 @@ async function postLikes(req, res) {
 }
 
 async function postDislikes(req, res) {
-    return await connection.query('DELETE FROM likes WHERE "postId" = $1 AND "userId" = $2', [postId, userId]);
+    return connection.query('DELETE FROM likes WHERE "postId" = $1 AND "userId" = $2', [postId, userId]);
 }
 
-export { postLikes, postDislikes };
+async function getLikes(){
+    return connection.query('SELECT FROM likes users.name, users.id FROM likes JOIN users ON users.id = likes.userId WHERE likes.postId = $2 AND user.id != $1 LIMIT 2', [userId, postId]);
+}
+
+export { postLikes, postDislikes, getLikes };
