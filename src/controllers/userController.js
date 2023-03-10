@@ -24,12 +24,14 @@ export const getUsers = async (req, res) => {
 export const getAnotherUserPage = async (req, res) => {
   const { id } = req.params;
   try {
-    const { rows } = await connection.query(`SELECT username FROM users WHERE id = $1`, [id]);
+    const { rows } = await connection.query(`SELECT username, "pictureUrl" FROM users WHERE id = $1`, [id]);
     const anotherUsername = rows[0].username;
+    const anotherUserPicture = rows[0].pictureUrl;
     const anotherUserPosts = await connection.query(`SELECT * FROM posts WHERE "userId" = $1`, [id]);
 
     const anotherUserPage = {
       username: anotherUsername,
+      pictureUrl: anotherUserPicture,
       posts: anotherUserPosts.rows
     }
     
