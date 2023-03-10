@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { checkHashTag } from "../middlewares/hashtagMiddleware.js"
+import { hashtag } from "../controllers/hashtagController.js"
 
-export const timeLineRoute = Router()
+export const hashtagRoute = Router()
 
-timeLineRoute.get("/hashtag/:hashtag", checkHashTag, timeline)
+hashtagRoute.get("/hashtag/:hashtag", checkHashTag, hashtag)

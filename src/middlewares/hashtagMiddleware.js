@@ -3,7 +3,7 @@ import { hashTagSchema } from '../models/hashTagModel.js'
 
 export async function checkHashTag(req, res, next) {
     const token = req.headers.authorization?.split('Bearer ')[1];
-    const hashtag = req.body.hashtag
+    const hashtag = req.params.hashtag
     
     const {error} = hashTagSchema.validate({hashtag: hashtag}, { abortEarly: false })
     try {
