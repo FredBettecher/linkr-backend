@@ -2,25 +2,26 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { connection } from "../models/index.js"
 
 
-export async function createpost(req, res){
+export async function updatePost(req, res){
     
     try {
         const token = res.locals.token
         const post = res.locals.post
+        const id = res.locals.id
         
         const users = await connection.query(`SELECT * FROM users WHERE password = $1;`, [token])
         
         if (users.rowCount > 0) {
             const hashtags = post.content.split(' ').filter(v=> v.startsWith('#'))
             const content = post.content.split('#').shift();
-            await connection.query(`INSERT INTO posts (description, link) VALUES ($1, $2);`, [content, post.link])
+            await connection.query(`UPDATE posts (description, link) VALUES ($1, $2) WHERE id = $3;`, [content, post.link, id])
 
-            const postId = await connection.query(`SELECT SCOPE_IDENTITY();`) //pega o id do ultimo post inserido
+            await connection.query(`DELETE FROM hashtags WHERE "postId" = $1`, [id])
 
             let tempHashTag = ""
             for (let i = 0; i<hashtags.length; i++){
                 tempHashTag = hashtags[i]
-                await connection.query(`INSERT INTO hashtags ("postId", "hashtagName") VALUES ($1, $2);`, [postId, tempHashTag])
+                await connection.query(`INSERT INTO hashtags ("postId", "hashtagName") VALUES ($1, $2);`, [id, tempHashTag])
             }
         }
         else {
