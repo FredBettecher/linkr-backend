@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { like, dislike, getPostLikes, resultLikes } from "../controllers/likeController.js";
+import { like, dislike, getLikes} from "../controllers/likeController.js";
 
 const likeRoute = Router();
 
-likeRoute.post("/like", like);
-likeRoute.delete("/dislike/:postId", dislike);
-likeRoute.get("/likes", getPostLikes);
-likeRoute.get("/isliked", resultLikes);
+likeRoute.post("/like/:postId", like);
+likeRoute.post("/dislike/:postId", dislike);
+likeRoute.get("/likes/:postId", getLikes);
+
+//falta autenticações!!!
 
 export default likeRoute;
