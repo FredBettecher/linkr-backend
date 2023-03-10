@@ -1,4 +1,4 @@
-import connection from "../models/index.js";
+import { connection } from "../models/index.js";
 
 async function postLikes(postId, userId) {
     return connection.query(`
