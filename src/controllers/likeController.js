@@ -1,7 +1,7 @@
-import { postLikes, postDislikes, getLikes } from "../repositorys/likeQuerie.js";
+import { postLikes, postDislikes, getLikes, countLikes } from "../repositorys/likeQuerie.js";
 
 async function like(req, res) {
-    const { userId } = req.locals.userId;
+    const { userId } = res.locals.userId;
     const { postId } = req.body;
 
     try {
@@ -15,7 +15,7 @@ async function like(req, res) {
 }
 
 async function dislike(req, res) {
-    const { userId } = req.locals.user;
+    const { userId } = res.locals.user;
     const { postId } = req.params;
 
     try {
@@ -30,17 +30,30 @@ async function dislike(req, res) {
 
 async function getPostLikes(req, res){
     const userId = res.locals.userId;
+    const postId = req.body;
 
     try{
-        const likes = await getLikes(userId);
-        const showLikes = {
-            likes,
-        }
-        res.send(showLikes);
+        const likes = await getLikes(postId, userId);
+
+        res.status(201).send(likes);
     }catch(error){
         console.log(error.message);
         res.status(500).send(error.message);
     }
 }
 
-export { like, dislike, getPostLikes }
+async function resultLikes(req, res){
+    const userId = res.locals.userId;
+    const postId = req.body;
+
+    try{
+        const liked = await countLikes(postId, userId);
+
+        res.status(201).send(liked);
+    }catch(error){
+        console.log(error.message);
+        res.status(500).send(error.message);
+    }
+}
+
+export { like, dislike, getPostLikes, resultLikes }
